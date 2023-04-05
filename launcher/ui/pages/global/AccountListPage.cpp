@@ -215,6 +215,22 @@ void AccountListPage::on_actionAddOffline_triggered()
     }
 }
 
+void AccountListPage::on_actionAddElyby_triggered()
+{
+    MinecraftAccountPtr account = ElybyLoginDialog::newAccount(
+        this,
+        tr("Please enter your Ely.by account email and password to add your account.")
+    );
+
+    if (account)
+    {
+        m_accounts->addAccount(account);
+        if (m_accounts->count() == 1) {
+            m_accounts->setDefaultAccount(account);
+        }
+    }
+}
+
 void AccountListPage::on_actionRemove_triggered()
 {
     QModelIndexList selection = ui->listView->selectionModel()->selectedIndexes();
