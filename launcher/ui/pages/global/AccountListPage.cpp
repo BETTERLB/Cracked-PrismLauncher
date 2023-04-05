@@ -48,6 +48,7 @@
 #include "ui/dialogs/OfflineLoginDialog.h"
 #include "ui/dialogs/LoginDialog.h"
 #include "ui/dialogs/MSALoginDialog.h"
+#include "ui/dialogs/ElybyLoginDialog.h"
 #include "ui/dialogs/CustomMessageBox.h"
 #include "ui/dialogs/SkinUploadDialog.h"
 
@@ -274,6 +275,7 @@ void AccountListPage::updateButtonStates()
     bool hasSelection = !selection.empty();
     bool accountIsReady = false;
     bool accountIsOnline = false;
+    bool accountIsElyby = false;
     if (hasSelection)
     {
         QModelIndex selected = selection.first();
@@ -283,8 +285,8 @@ void AccountListPage::updateButtonStates()
     }
     ui->actionRemove->setEnabled(accountIsReady);
     ui->actionSetDefault->setEnabled(accountIsReady);
-    ui->actionUploadSkin->setEnabled(accountIsReady && accountIsOnline);
-    ui->actionDeleteSkin->setEnabled(accountIsReady && accountIsOnline);
+    ui->actionUploadSkin->setEnabled(accountIsReady && accountIsOnline && !accountIsElyby);
+    ui->actionDeleteSkin->setEnabled(accountIsReady && accountIsOnline && !accountIsElyby);
     ui->actionRefresh->setEnabled(accountIsReady && accountIsOnline);
 
     if(m_accounts->defaultAccount().get() == nullptr) {
